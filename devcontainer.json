@@ -1,0 +1,57 @@
+{
+    "build": { 
+        "dockerfile": "Dockerfile",
+        "args": {
+            "ANO_CLAB_VERSION": "${localEnv:ANO_CLAB_VERSION}",
+            "ANO_PRIV_KEY_NAME": "${localEnv:ANO_PRIV_KEY_NAME}",
+            "ANO_NETBOX_URL": "${localEnv:ANO_NETBOX_URL}",
+            "ANO_NETBOX_TOKEN": "${localEnv:ANO_NETBOX_TOKEN}"
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "version": "latest"
+        },
+        // Add sshd to support gh cli codespace cp.
+        "ghcr.io/devcontainers/features/sshd:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/terraform:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "samuelcolvin.jinjahtml",
+                "oderwat.indent-rainbow",
+                "AykutSarac.jsoncrack-vscode",
+                "hilleer.yaml-plus-json",
+                // git essentials
+                "piotrpalarz.vscode-gitignore-generator",
+                "mhutchie.git-graph",
+                "donjayamanne.githistory",
+                // spell checker
+                "streetsidesoftware.code-spell-checker",
+                // drawio and tldraw
+                "hediet.vscode-drawio",
+                // excalidraw is pre-installed in universal
+                "hediet.vscode-drawio",
+                "tldraw-org.tldraw-vscode",
+                // markdown
+                "yzhang.markdown-all-in-one",
+                "bierner.markdown-checkbox",
+                "DavidAnson.vscode-markdownlint",
+                // various tools
+                "tuxtina.json2yaml",
+                "mutantdino.resourcemonitor",
+                "fabiospampinato.vscode-terminals",
+                //Containerlab
+                "srl-labs.vscode-containerlab",
+                //marp preview extension
+                "marp-team.marp-vscode"
+            ]
+        }
+    },
+    "forwardPorts": [2222]
+}
