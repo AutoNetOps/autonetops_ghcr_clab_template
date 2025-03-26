@@ -29,12 +29,13 @@ RUN apt-get update \
     && rm -rf /usr/share/doc /usr/share/man \
     && apt-get clean
 
+COPY ./postCreate.py /bin/postCreate.py
+RUN chmod +x /bin/postCreate.py
+
 # Allow the 'vscode' user to run sudo without a password
 RUN echo "vscode ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vscode \
     && chmod 0440 /etc/sudoers.d/vscode
 
-# Switch to the non-root 'vscode' user (default in devcontainers)
-USER vscode
 
 # Install Containerlab and Python tools
 RUN bash -c "$(curl -sL https://get.containerlab.dev)" -- -v "${ANO_CLAB_VERSION}" \
