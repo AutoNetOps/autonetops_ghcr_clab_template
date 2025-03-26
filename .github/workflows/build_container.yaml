@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Pre-build dev container image
-        uses: devcontainers/ci@0.3
+        uses: devcontainers/ci@v0.3
         env:
           ANO_CLAB_VERSION: ${{ inputs.clab_version }}
           ANO_PRIV_KEY_NAME: ${{ inputs.ano_priv_key_name }}
