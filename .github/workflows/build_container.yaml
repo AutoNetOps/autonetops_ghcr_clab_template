@@ -2,6 +2,9 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,12 +14,26 @@ jobs:
         uses: actions/checkout@v4.2.2
       
       - name: Login to GHCR
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3.4.0
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      #- name: Build and push
+      
+      - name: Pre-build dev container image
+        uses: devcontainers/ci@0.3
+        env:
+          ANO_CLAB_VERSION: ${{ inputs.clab_version }}
+          ANO_PRIV_KEY_NAME: ${{ inputs.ano_priv_key_name }}
+          ANO_NETBOX_URL: ${{ inputs.ano_netbox_url }}
+          ANO_NETBOX_TOKEN: ${{ inputs.ano_netbox_token }}
+          
+        with:
+          imageName: ghcr.io/${{ github.repository }}/${{ inputs.container_name }}
+          imageTag: latest
+          push: always
+          
+        
       #  id: docker_build
       #  uses: docker/build-push-action@v4
       #  with:
