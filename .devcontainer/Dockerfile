@@ -29,6 +29,11 @@ RUN apt-get update \
     && rm -rf /usr/share/doc /usr/share/man \
     && apt-get clean
 
+# Install Python packages
+COPY ./requirements.txt /tmp/requirements.txt
+RUN pip3 install -r /tmp/requirements.txt
+
+# Copy the postCreate.py script
 COPY ./postCreate.py /bin/postCreate.py
 RUN chmod +x /bin/postCreate.py
 
@@ -38,10 +43,7 @@ RUN echo "vscode ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vscode \
 
 
 # Install Containerlab and Python tools
-RUN bash -c "$(curl -sL https://get.containerlab.dev)" -- -v "${ANO_CLAB_VERSION}" \
-    && pip3 install --user yamllint \
-    && pip3 install --user "eos-downloader>=0.10.1" \
-    && pip3 install --user passlib
+RUN bash -c "$(curl -sL https://get.containerlab.dev)" -- -v "${ANO_CLAB_VERSION}" 
 
 # Generate an SSH key pair for the 'vscode' user
 RUN ssh-keygen -t rsa -b 2048 -f ~/.ssh/${ANO_PRIV_KEY_NAME} -N ""
