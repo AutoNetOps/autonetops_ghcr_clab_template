@@ -42,6 +42,6 @@ jobs:
           ANO_NETBOX_TOKEN: ${{ inputs.ano_netbox_token }}
           
         with:
-          imageName: ghcr.io/${{ toLower(github.repository) }}/autonetops_base_image
+          imageName: ghcr.io/${{ github.repository }}/autonetops_base_image
           imageTag: latest
           push: always
