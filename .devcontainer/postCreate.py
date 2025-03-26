@@ -24,7 +24,7 @@ def postCreate(bashrc, run):
     if bashrc:
         try:
             # Read the YAML file
-            with open(yaml, 'r') as f:
+            with open(bashrc, 'r') as f:
                 lines_to_append = yaml.safe_load(f)
                 if not lines_to_append:
                     click.echo("No lines found in YAML file.")
