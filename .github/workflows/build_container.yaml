@@ -1,6 +1,19 @@
+name: Build base container image
 on:
-  push:
   workflow_dispatch:
+    inputs:
+      clab_version:
+        required: true
+        type: string
+      ano_priv_key_name:
+        required: true
+        type: string
+      ano_netbox_url:
+        required: true
+        type: string
+      ano_netbox_token:
+        required: true
+        type: string
 
 permissions:
   packages: write
@@ -29,11 +42,6 @@ jobs:
           ANO_NETBOX_TOKEN: ${{ inputs.ano_netbox_token }}
           
         with:
-          imageName: ghcr.io/${{ github.repository }}/${{ inputs.container_name }}
+          imageName: ghcr.io/${{ github.repository }}/autonetops_base_image
           imageTag: latest
           push: always
-          
-        
-      #  id: docker_build
-      #  uses: docker/build-push-action@v4
-      #  with:
