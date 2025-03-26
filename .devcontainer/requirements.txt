@@ -9,3 +9,7 @@ ipdb
 pynetbox
 Jinja2
 click
+passlib
+pyyaml
+yamllint
+eos-downloader>=0.10.1
