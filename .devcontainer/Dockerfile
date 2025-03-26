@@ -43,7 +43,10 @@ RUN echo "vscode ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vscode \
 
 
 # Install Containerlab and Python tools
-RUN bash -c "$(curl -sL https://get.containerlab.dev)" -- -v "${ANO_CLAB_VERSION}" 
+RUN bash -c "$(curl -sL https://get.containerlab.dev)" -- -v "${ANO_CLAB_VERSION}" \
+    && pip3 install --user yamllint \
+    && pip3 install --user "eos-downloader>=0.10.1" \
+    && pip3 install --user passlib
 
 # Generate an SSH key pair for the 'vscode' user
 RUN ssh-keygen -t rsa -b 2048 -f ~/.ssh/${ANO_PRIV_KEY_NAME} -N ""
