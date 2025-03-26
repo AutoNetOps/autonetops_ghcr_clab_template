@@ -1,5 +1,7 @@
 name: Build base container image
 on:
+  repository_dispatch:
+    types: [build-image]
   workflow_dispatch:
     inputs:
       clab_version:
