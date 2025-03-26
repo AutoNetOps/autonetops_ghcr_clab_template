@@ -41,6 +41,8 @@ RUN chmod +x /bin/postCreate.py
 RUN echo "vscode ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vscode \
     && chmod 0440 /etc/sudoers.d/vscode
 
+    USER vscode
+
 
 # Install Containerlab and Python tools
 RUN bash -c "$(curl -sL https://get.containerlab.dev)" -- -v "${ANO_CLAB_VERSION}" \
