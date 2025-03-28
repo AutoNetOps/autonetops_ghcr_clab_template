@@ -37,9 +37,6 @@ RUN pip3 install -r /tmp/requirements.txt
 COPY ./postCreate.py /bin/postCreate.py
 RUN chmod +x /bin/postCreate.py
 
-# Make /etc/hosts writable by everyone
-RUN chmod 666 /etc/hosts
-
 USER vscode
 
 
