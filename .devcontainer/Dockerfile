@@ -37,11 +37,10 @@ RUN pip3 install -r /tmp/requirements.txt
 COPY ./postCreate.py /bin/postCreate.py
 RUN chmod +x /bin/postCreate.py
 
-# Allow the 'vscode' user to run sudo without a password
-RUN echo "vscode ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/vscode \
-    && chmod 0440 /etc/sudoers.d/vscode
+# Make /etc/hosts writable by everyone
+RUN chmod 666 /etc/hosts
 
-    USER vscode
+USER vscode
 
 
 # Install Containerlab and Python tools
